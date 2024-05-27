@@ -1,0 +1,136 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  generation: 2
+  labels:
+    app: fetchtrades-api
+  managedFields:
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    manager: kubectl-create
+    operation: Update
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    manager: dashboard
+    operation: Update
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    manager: kube-controller-manager
+    operation: Update
+  name: fetchtrades-api
+  namespace: fetchtrades
+  resourceVersion: "68299"
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: fetchtrades-api
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: fetchtrades-api
+    spec:
+      imagePullSecrets:
+        - name: docker.io 
+      containers:
+      - env:
+        - name: BINANCE
+          value: true
+        - name: BITFINEX
+          value: false
+        - name: BITTREX
+          value: false
+        - name: BYBIT
+          value: false
+        - name: HITBTC
+          value: false
+        - name: KRAKEN
+          value: false
+        - name: OKEX
+          value: false
+        - name: MEMCACHED_HOST
+          value: "yy.yyy.yy.yyy:30817"
+        image: reponame/fetchtrades_monitoring
+        imagePullPolicy: Always
+        name: fetchtrades-api-grl87
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      nodeSelector:
+        nodename: memcached
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+
+
+---
+
+# apiVersion: v1
+# kind: Service
+# metadata:
+#  labels:
+#    app: fetchtrades-service-api
+#  managedFields:
+#  - apiVersion: v1
+#    fieldsType: FieldsV1
+#    manager: kubectl-expose
+#    operation: Update
+#  name: fetchtrades-service-api
+#  namespace: fetchtrades
+#  resourceVersion: "84571"
+# spec:
+#  clusterIP: 10.109.137.13
+#  clusterIPs:
+#  - 10.109.137.13
+#  ports:
+#  - port: 8080
+#    protocol: TCP
+#    targetPort: 8080
+#  selector:
+#    app: fetchtrades-api
+#  sessionAffinity: None
+#  type: ClusterIP
+# status:
+#  loadBalancer: {}
+
+# ---
+
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   labels:
+#     app: fetchtrades-api-node-port
+#   managedFields:
+#   - apiVersion: v1
+#     fieldsType: FieldsV1
+#     manager: kubectl-expose
+#     operation: Update
+#   name: fetchtrades-api-node-port
+#   namespace: fetchtrades
+#   resourceVersion: "84571"
+# spec:
+#   ports:
+#   - port: 8080
+#     protocol: TCP
+#     targetPort: 8080
+#     nodePort: 30800
+#   selector:
+#     app: fetchtrades-api
+#   sessionAffinity: None
+#   type: NodePort
+# status:
+#   loadBalancer: {}
+

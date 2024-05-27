@@ -1,0 +1,22 @@
+version: '3.3'
+services:
+
+
+ memcached_binance:
+   container_name: binance_memcached
+   image: memcached:latest
+   ports:
+    - 11211:11211
+
+#  memcached_bitfinex:
+#    container_name: bitfinex_memcached
+#    image: memcached:latest
+#    ports:
+#     - 11212:11211
+  
+
+  #  memcached_bittrex:
+  #  container_name: bittrex_memcached
+  #  image: memcached:latest
+  #  ports:
+  #   - 11213:11211

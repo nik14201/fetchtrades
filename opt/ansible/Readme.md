@@ -1,0 +1,1 @@
+ansible-playbook k8s/restart.yml  -i hosts

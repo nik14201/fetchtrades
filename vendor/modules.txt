@@ -1,0 +1,37 @@
+# cloud.google.com/go/firestore v1.6.0
+## explicit
+# cloud.google.com/go/storage v1.18.0
+## explicit
+# firebase.google.com/go v3.13.0+incompatible
+## explicit
+# github.com/bradfitz/gomemcache v0.0.0-20190913173617-a41fca850d0b
+## explicit
+# github.com/google/uuid v1.3.0
+## explicit
+# github.com/gorilla/websocket v1.4.2
+## explicit
+github.com/gorilla/websocket
+# github.com/influxdata/influxdb-client-go/v2 v2.5.1
+## explicit
+# github.com/jackc/pgx v3.6.2+incompatible
+## explicit
+# github.com/jmoiron/sqlx v1.3.4
+## explicit
+github.com/jmoiron/sqlx
+github.com/jmoiron/sqlx/reflectx
+# github.com/lib/pq v1.10.2
+## explicit
+github.com/lib/pq
+github.com/lib/pq/oid
+github.com/lib/pq/scram
+# github.com/pkg/errors v0.9.1
+## explicit
+# github.com/shopspring/decimal v1.2.0
+## explicit
+# golang.org/x/crypto v0.0.0-20210513164829-c07d793c2f9a
+## explicit
+golang.org/x/crypto/pbkdf2
+# golang.org/x/oauth2 v0.0.0-20211005180243-6b3c2da341f1
+## explicit
+# golang.org/x/text v0.3.6
+## explicit

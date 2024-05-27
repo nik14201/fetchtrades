@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  generation: 2
+  labels:
+    app: fetchtrades-api-binance
+  managedFields:
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    manager: kubectl-create
+    operation: Update
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    manager: dashboard
+    operation: Update
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    manager: kube-controller-manager
+    operation: Update
+  name: fetchtrades-api-binance
+  namespace: fetchtrades
+  resourceVersion: "68299"
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: fetchtrades-api-binance
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: fetchtrades-api-binance
+    spec:
+      imagePullSecrets:
+        - name: reponame
+      containers:
+      - env:
+        - name: BINANCE
+          value: "true"
+        - name: BITFINEX
+          value: "false"
+        - name: BITTREX
+          value: "false"
+        - name: BYBIT
+          value: "false"
+        - name: HITBTC
+          value: "false"
+        - name: KRAKEN
+          value: "false"
+        - name: OKEX
+          value: "false"
+        - name: MEMCACHED_HOST
+          value: "yy.yyy.yy.yyy:30850"
+        - name: SCHEME 
+          value: wss
+        - name: HOST
+          value: "stream.binance.com:9443"
+        # - name: EXPATH
+        #   value: "/ws/v5/public"
+        image: reponame/fetchtrades_monitoring
+        imagePullPolicy: Always
+        command: ["./main"]
+        name: fetchtrades-api-binance-grl87
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      nodeSelector:
+        nodename: memcached
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

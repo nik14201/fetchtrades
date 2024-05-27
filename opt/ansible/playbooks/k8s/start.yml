@@ -1,0 +1,67 @@
+- name: start fetchtrades
+  hosts: fetchtrades
+  
+  tasks:
+    - ping:
+    - name: create binance memcached
+      command: kubectl create -f ~/tmp/fetchtrades/kube/binance/memcached.yaml
+      ignore_errors: True
+      register: create_binance_memcached
+    - name: create binance app 
+      command: kubectl create -f ~/tmp/fetchtrades/kube/binance/app.yaml
+      ignore_errors: True
+      register: create_binance_app
+
+    - name: create bitfinex memcached
+      command: kubectl create -f ~/tmp/fetchtrades/kube/bitfinex/memcached.yaml
+      ignore_errors: True
+      register: create_bitfinex_memcached
+    - name: create bitfinex app 
+      command: kubectl create -f ~/tmp/fetchtrades/kube/bitfinex/app.yaml
+      ignore_errors: True
+      register: create_bitfinex_app 
+
+    - name: create bittrex memcached
+      command: kubectl create -f ~/tmp/fetchtrades/kube/bittrex/memcached.yaml
+      ignore_errors: True
+      register: create_bittrex_memcached
+    - name: create bittrex app 
+      command: kubectl create -f ~/tmp/fetchtrades/kube/bittrex/app.yaml
+      ignore_errors: True
+      register: create_bittrex_app 
+
+    - name: create bybit memcached
+      command: kubectl create -f ~/tmp/fetchtrades/kube/bybit/memcached.yaml
+      ignore_errors: True
+      register: create_bybit_memcached
+    - name: create bybit app 
+      command: kubectl create -f ~/tmp/fetchtrades/kube/bybit/app.yaml
+      ignore_errors: True
+      register: create_bybit_app
+
+    - name: create hitbtc memcached
+      command: kubectl create -f ~/tmp/fetchtrades/kube/hitbtc/memcached.yaml
+      ignore_errors: True
+      register: create_hitbtc_memcached
+    - name: create hitbtc app 
+      command: kubectl create -f ~/tmp/fetchtrades/kube/hitbtc/app.yaml
+      ignore_errors: True
+      register: create_hitbtc_app
+
+    - name: create kraken memcached
+      command: kubectl create -f ~/tmp/fetchtrades/kube/kraken/memcached.yaml
+      ignore_errors: True
+      register: create_kraken_memcached
+    - name: create kraken app 
+      command: kubectl create -f ~/tmp/fetchtrades/kube/kraken/app.yaml
+      ignore_errors: True
+      register: create_kraken_app
+
+    - name: create okex memcached
+      command: kubectl create -f ~/tmp/fetchtrades/kube/okex/memcached.yaml
+      ignore_errors: True
+      register: create_okex_memcached
+    - name: create okex app 
+      command: kubectl create -f ~/tmp/fetchtrades/kube/okex/app.yaml
+      ignore_errors: True
+      register: create_okex_app

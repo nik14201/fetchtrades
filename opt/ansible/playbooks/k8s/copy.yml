@@ -1,0 +1,7 @@
+- name: copy fetchtrades
+  hosts: fetchtrades
+   
+  tasks:
+    - ping:
+    - name: copy
+      synchronize:  src=/home/user/www/serv/fetchtrades/opt/kube dest=/home/user/tmp/fetchtrades

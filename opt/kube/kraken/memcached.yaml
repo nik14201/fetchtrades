@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  generation: 2
+  labels:
+    app: memcached-fetchtrades-kraken
+    name: memcached-fetchtrades-kraken
+  managedFields:
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    manager: kubectl-client-side-apply
+    operation: Update
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    manager: kube-controller-manager
+    operation: Update
+  name: memcached-fetchtrades-kraken
+  namespace: fetchtrades
+  resourceVersion: "33831"
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: memcached-fetchtrades-kraken
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: memcached-fetchtrades-kraken
+    spec:
+      containers:
+      - name: memcached
+        image: memcached:1.6.17
+        resources:
+          limits:
+            cpu: 200m
+            memory: 2000Mi
+          requests:
+            cpu: 100m
+            memory: 1000Mi
+        ports:
+          - containerPort: 11211
+            protocol: TCP
+        args:
+          - -m 2047
+          - -I 50M
+      - name: memcached-exporter
+        image: prom/memcached-exporter
+        ports:
+          - containerPort: 9150
+            protocol: TCP
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        nodename: memcached
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 5
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: memcached-fetchtrades-kraken
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    manager: kubectl-expose
+    operation: Update
+  name: memcached-fetchtrades-kraken-node-port
+  namespace: fetchtrades
+  resourceVersion: "84571"
+spec:
+  ports:
+  - port: 11211
+    protocol: TCP
+    targetPort: 11211
+    nodePort: 30855
+  selector:
+    app: memcached-fetchtrades-kraken
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
+
+
+

@@ -1,0 +1,2 @@
+[fetchtrades]
+fetchtrades ansible_host=XXX.XXX.XXX.XXX ansible_port=22 ansible_user=user ansible_private_key_file=/home/user/.ssh/serv_master

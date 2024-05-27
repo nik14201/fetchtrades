@@ -1,0 +1,68 @@
+- name: stop fetchtrades
+  hosts: fetchtrades
+
+  
+  tasks:
+    - ping:
+    - name: delete binance memcached
+      command: kubectl delete -f ~/tmp/fetchtrades/kube/binance/memcached.yaml
+      ignore_errors: True
+      register: delete_binance_memcached
+    - name: delete binance app 
+      command: kubectl delete -f ~/tmp/fetchtrades/kube/binance/app.yaml
+      ignore_errors: True
+      register: delete_binance_app
+
+    - name: delete bitfinex memcached
+      command: kubectl delete -f ~/tmp/fetchtrades/kube/bitfinex/memcached.yaml
+      ignore_errors: True
+      register: delete_bitfinex_memcached
+    - name: delete bitfinex app 
+      command: kubectl delete -f ~/tmp/fetchtrades/kube/bitfinex/app.yaml
+      ignore_errors: True
+      register: delete_bitfinex_app 
+
+    - name: delete bittrex memcached
+      command: kubectl delete -f ~/tmp/fetchtrades/kube/bittrex/memcached.yaml
+      ignore_errors: True
+      register: delete_bittrex_memcached
+    - name: delete bittrex app 
+      command: kubectl delete -f ~/tmp/fetchtrades/kube/bittrex/app.yaml
+      ignore_errors: True
+      register: delete_bittrex_app 
+
+    - name: delete bybit memcached
+      command: kubectl delete -f ~/tmp/fetchtrades/kube/bybit/memcached.yaml
+      ignore_errors: True
+      register: delete_bybit_memcached
+    - name: delete bybit app 
+      command: kubectl delete -f ~/tmp/fetchtrades/kube/bybit/app.yaml
+      ignore_errors: True
+      register: delete_bybit_app
+
+    - name: delete hitbtc memcached
+      command: kubectl delete -f ~/tmp/fetchtrades/kube/hitbtc/memcached.yaml
+      ignore_errors: True
+      register: delete_hitbtc_memcached
+    - name: delete hitbtc app 
+      command: kubectl delete -f ~/tmp/fetchtrades/kube/hitbtc/app.yaml
+      ignore_errors: True
+      register: delete_hitbtc_app
+
+    - name: delete kraken memcached
+      command: kubectl delete -f ~/tmp/fetchtrades/kube/kraken/memcached.yaml
+      ignore_errors: True
+      register: delete_kraken_memcached
+    - name: delete kraken app 
+      command: kubectl delete -f ~/tmp/fetchtrades/kube/kraken/app.yaml
+      ignore_errors: True
+      register: delete_kraken_app
+
+    - name: delete okex memcached
+      command: kubectl delete -f ~/tmp/fetchtrades/kube/okex/memcached.yaml
+      ignore_errors: True
+      register: delete_okex_memcached
+    - name: delete okex app 
+      command: kubectl delete -f ~/tmp/fetchtrades/kube/okex/app.yaml
+      ignore_errors: True
+      register: delete_okex_app

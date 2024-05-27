@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  generation: 2
+  labels:
+    app: fetchtrades-api-bybit
+  managedFields:
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    manager: kubectl-create
+    operation: Update
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    manager: dashboard
+    operation: Update
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    manager: kube-controller-manager
+    operation: Update
+  name: fetchtrades-api-bybit
+  namespace: fetchtrades
+  resourceVersion: "68299"
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: fetchtrades-api-bybit
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: fetchtrades-api-bybit
+    spec:
+      imagePullSecrets:
+        - name: reponame
+      containers:
+      - env:
+        - name: BINANCE
+          value: "false"
+        - name: BITFINEX
+          value: "false"
+        - name: BITTREX
+          value: "false"
+        - name: BYBIT
+          value: "true"
+        - name: HITBTC
+          value: "false"
+        - name: KRAKEN
+          value: "false"
+        - name: OKEX
+          value: "false"
+        - name: MEMCACHED_HOST
+          value: "yy.yyy.yy.yyy:30853"
+        - name: SCHEME 
+          value: wss
+        - name: HOST
+          value: "stream.bybit.com"
+        - name: EXPATH
+          value: "/realtime"
+        image: reponame/fetchtrades_monitoring
+        command: ["./main"]
+        imagePullPolicy: Always
+        name: fetchtrades-api-bybit-grl87
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      nodeSelector:
+        nodename: memcached
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

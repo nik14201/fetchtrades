@@ -1,0 +1,21 @@
+- name: restart fetchtrades
+  hosts: serv-master
+   
+  # tasks:
+  #   - ping:
+  #   - name: delete api_write
+  #     command: kubectl delete -f ~/www/opt/kube/api_write.yaml
+  #   # - name: delete ohlcv
+  #   #   command: kubectl delete -f ~/www/opt/kube/ohlcv.yaml
+  #   - name: delete app
+  #     command: kubectl delete -f ~/www/opt/kube/app.yaml
+
+  #   - name: copy
+  #     synchronize:  src=/home/user/www/serv/exchangecrypts/opt/kube dest=/home/exchangecrypt/www/opt
+    
+  #   - name: create api_write
+  #     command: kubectl create -f ~/tmp/exchangecrypt/kube/api_write.yaml
+  #   # - name: create ohlcv
+  #   #   command: kubectl create -f ~/tmp/exchangecrypt/kube/ohlcv.yaml
+  #   - name: create app
+  #     command: kubectl create -f ~/tmp/exchangecrypt/kube/app.yaml

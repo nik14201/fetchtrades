@@ -1,0 +1,8 @@
+/bin/*
+/pkg/*
+/bin/*.a
+/pkg/**/*.a
+/bin/
+*.a
+.git
+main

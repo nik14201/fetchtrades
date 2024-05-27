@@ -1,0 +1,8 @@
+version: '3.7'
+services:
+  memcached_db_container:
+    image: memcached:latest
+    ports:
+      - 11211:11211
+    command:
+      - '--memory-limit=1024'

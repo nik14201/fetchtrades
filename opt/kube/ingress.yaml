@@ -21,7 +21,7 @@ spec:
   - host: domen.com
     http:
       paths:
-      - path: /han/
+      - path: /admin/
         pathType: ImplementationSpecific
         backend:
           service:
